@@ -1,19 +1,17 @@
-import time
-from subprocess import Popen, PIPE
-from threading import Thread
 import os
-import sys
 import random
+import sys
+import time
+from subprocess import PIPE, Popen
+from threading import Thread
 
 COMMAND = """ffmpeg -r 24 -i movie.mp4 -vf drawtext="fontfile=hyped.ttf: \
         textfile=text.txt: fontcolor=black: fontsize=64: box=1: boxcolor=teal@0.75: \
         boxborderw=8: x=(w-text_w)/2: y=h/2:reload=1" -codec:a copy -r 24 output.mp4"""
 
 TEXT = "".join(
-    random.choice(
-        (str.upper, str.lower)
-    )(char) for char in "What a great hole! Scary!")
-
+    random.choice((str.upper, str.lower))(char) for char in "What a great hole! Scary!"
+)
 
 
 def textwriter(text: str) -> None:

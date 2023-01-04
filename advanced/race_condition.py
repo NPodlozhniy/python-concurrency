@@ -1,5 +1,5 @@
-from threading import Thread
 import sys
+from threading import Thread
 
 # context switching frequency
 sys.setswitchinterval(0.001)
@@ -8,6 +8,7 @@ counter = 0
 
 num = 50000
 n_loop = 30
+
 
 def increment():
     global counter

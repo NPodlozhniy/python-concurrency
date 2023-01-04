@@ -1,6 +1,6 @@
 from threading import Thread
 
-from functions import io_bound, timing, chunks
+from functions import chunks, io_bound, timing
 
 
 def run_sync():

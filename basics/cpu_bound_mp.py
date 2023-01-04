@@ -1,8 +1,9 @@
+from multiprocessing import Pool, Process, cpu_count
+
 from functions import cpu_bound, timing
-from multiprocessing import Process, cpu_count
-from multiprocessing import Pool
 
 NUMBER = 30
+
 
 def run_sync():
     for i in [NUMBER] * 12:

@@ -1,11 +1,10 @@
-import time
 import sys
-
+import time
 # copy info from wrapped func to wrapper func
 from functools import wraps
 
 
-def cprint(statement, debug: bool=True, end="\n") -> None:
+def cprint(statement, debug: bool = True, end="\n") -> None:
     print(statement, file=sys.stderr if debug else sys.stdout, flush=True, end=end)
 
 
@@ -17,6 +16,7 @@ def timing(func):
         te = time.time()
         cprint(f"function <{func.__name__}> took: {te-ts:.2f} seconds")
         return result
+
     return wrapper
 
 
@@ -30,7 +30,7 @@ def io_bound(n: int) -> None:
     """
     time.sleep(2)
     fpath = "tmp_io_bound.txt"
-    open(fpath, "w").close() # clean the file
+    open(fpath, "w").close()  # clean the file
     cprint(f"I am about to start task number {n}")
     with open(fpath, "w") as handler:
         for i in range(10):
@@ -52,4 +52,4 @@ def cpu_bound(n: int) -> int:
 def chunks(lst: list, n: int) -> list:
     """Yield successive n-sized chunks from lst."""
     for i in range(0, len(lst), n):
-        yield lst[i:i+n]
+        yield lst[i : i + n]

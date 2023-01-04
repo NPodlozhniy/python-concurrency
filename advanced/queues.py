@@ -1,6 +1,6 @@
-from time import sleep
-from threading import Thread
 import queue
+from threading import Thread
+from time import sleep
 
 q = queue.Queue()
 
@@ -18,8 +18,9 @@ def some_setup_process():
 def worker():
     print("i am doing something not important", flush=True)
     # it needs to make sure the setup process in finished
-    q.get() # wait until another thread don't put something to queue
+    q.get()  # wait until another thread don't put something to queue
     print("i am inserting data", flush=True)
+
 
 tasks = []
 

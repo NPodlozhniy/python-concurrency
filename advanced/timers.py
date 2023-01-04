@@ -1,15 +1,16 @@
-from time import sleep
-from threading import Thread, Timer
-
 from sched import scheduler
+from threading import Thread, Timer
+from time import sleep
 
 DELAY = 3
+
 
 def run_later(message: str) -> None:
     for i in range(DELAY, 0, -1):
         print("%d.." % i, flush=True, end=" ")
-        sleep(1) # the most popular way to implement timer
+        sleep(1)  # the most popular way to implement timer
     print(message, flush=True)
+
 
 print("Let's wait a bit!", flush=True)
 
@@ -17,7 +18,7 @@ print("Let's wait a bit!", flush=True)
 timer = Timer(DELAY, run_later, kwargs={"message": "Hello, world!"})
 timer.start()
 
-sleep(DELAY) # ignored by timer
+sleep(DELAY)  # ignored by timer
 
 timer.join()
 
@@ -31,6 +32,6 @@ print("\nI am about to execute a scheduler", flush=True)
 t = Thread(target=s.run)
 t.start()
 
-sleep(DELAY) # ignored by scheduler
+sleep(DELAY)  # ignored by scheduler
 
 t.join()
