@@ -14,7 +14,8 @@ URLS = [
     "microsoft.com",
     "amazon.com",
     "netflix.com",
-] * 10
+    "qwerty12345.ru",
+]
 
 # fetch all of these recources concurrently
 
@@ -39,9 +40,15 @@ async def fetch(urls: list):
         worker = async_get(url) # create a coroutine
         task = asyncio.create_task(worker) # (optional) create task from coroutine
         tasks.append(task) # append to list of tasks
-    # wait for all
-    return await asyncio.gather(*tasks)
-
+    
+    results = []
+    for coroutine in asyncio.as_completed(tasks, timeout=10):
+        try:
+            result = await coroutine
+            results.append(result)
+        except Exception as e:
+            print(e, flush=True)
+    return results
 # STEP 3: To provide a general loop
 
 coroutines = fetch(URLS)
