@@ -9,9 +9,17 @@ def print_after_sec(message):
 
 
 with ThreadPoolExecutor(max_workers=3) as pool:
+    future = []
     for i in range(10):
         # print phrases in triplets as soon as max_workers is 3
-        future = pool.submit(print_after_sec, ("Hello, world!"))
-        print(future.done())
+        task = pool.submit(print_after_sec, (f"Hello, world {i}!"))
+        future.append(
+            task
+        )
+        print(task.done())
 
-print(future.result())
+for task in future:
+    try:
+        print(task.result(), flush=True)
+    except Exception as e:
+        print(e, flush=True)
